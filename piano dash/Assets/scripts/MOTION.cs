@@ -45,7 +45,7 @@ public class MOTION : MonoBehaviour
         {
             CanFire();
         }
-        if (fire.transform.position.y > 4f || fire.transform.position.y < -4f){
+        if (fire.transform.position.y > 2f || fire.transform.position.y < -4f){
             fire.transform.position = new Vector3(x, y, z);
             fire.velocity = Vector2.zero;
             FireAllowed = true;
