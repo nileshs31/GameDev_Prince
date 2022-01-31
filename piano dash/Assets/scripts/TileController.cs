@@ -40,12 +40,12 @@ public class TileController : MonoBehaviour
     public void showBombBottom()
     {
         count = Random.Range(0, 6);
-        tiles[count].PlaceBomb();
+        tiles[count].PlaceBombBottom();
     }
     public void showBombTop()
     {
         count = Random.Range(6, 12);
-        tiles[count].PlaceBomb();
+        tiles[count].PlaceBombTop();
     }
      
 

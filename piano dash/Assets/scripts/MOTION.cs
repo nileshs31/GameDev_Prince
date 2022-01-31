@@ -19,11 +19,12 @@ public class MOTION : MonoBehaviour
     public gameConroller scriptManager;
     //public health h;
     public int coin;
-    public int hearts;
+    public int lives;
     public AudioSource speaker;
     public AudioClip bombAudio;
     public AudioClip boundarybounce;
     public Text coinDisplay;
+    public GameObject[] heart;
    
 
     public Transform Target;
@@ -79,74 +80,31 @@ public class MOTION : MonoBehaviour
             AIM.SetActive(true);
             
             
-            if (crashed.gameObject.GetComponent<SpriteRenderer>().color==Color.green) ////FOR SCORE and game
+            if (crashed.gameObject.GetComponent<SpriteRenderer>().color==Color.green)
             {
                 crashed.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 playsound = decide_tile.pickSound();
                 speaker.GetComponent<AudioSource>().clip = playsound;
                 speaker.Play();
-                if (false)
-                {
-                    //TileCon.SelectTileBottom();
-                    //SM.AddScore();
-
-                    /*if (crashed.gameObject.GetComponent<Tiles>().tileNum == TileCon.num)
-                    {
-                        //TileCon.SelectTileBottom();
-
-                    }*/
-                    //AM.Play1();
-                }                  //commented part
             }
-            else if (crashed.gameObject.GetComponent<SpriteRenderer>().color==Color.cyan)///FOR QUIT
+            else if (crashed.gameObject.GetComponent<SpriteRenderer>().color==Color.cyan)
             {
-                //crashed.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
-                if (hearts == 1)
+                heart[lives - 1].SetActive(false);
+                speaker.GetComponent<AudioSource>().clip = bombAudio;
+                speaker.Play();
+                if (lives == 1)
                 {
                     scriptManager.GameOver();
                 }
                 else
                 {
-                    --hearts;
+                    --lives;
                     FireAllowed = true;
-                    AIM.SetActive(true);
-                    speaker.GetComponent<AudioSource>().clip = bombAudio;
-                    speaker.Play();
-                    if (false)
-                    {
-                        //transform.position = crashed.gameObject.GetComponent<Tiles>().Rester().transform.position;
-                        //fire.velocity = Vector2.zero;
-                        //gameObject.transform.localScale = new Vector3(0.3196901f, -0.3196901f, 0.3196901f);
-
-                        //AM.PlayA3();
-                        /*if (crashed.gameObject.GetComponent<Tiles>().tileNum != TileCon.num)
-                        {
-                            //TileCon.SelectTileBottom();
-
-                        }*/
-                    }              //commented part
                 }
             }
-            else                                                                         /////for other tiles 
+            else                                                                         
             {
-                
-                //crashed.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-                if (false)
-                {
-                    //TileCon.showBombTop();
-                    /*AIM.SetActive(true);
-                    fire.velocity = Vector2.zero;
-                    gameObject.transform.localScale = new Vector3(0.3196901f, -0.3196901f, 0.3196901f);
-                    transform.position = crashed.gameObject.GetComponent<Tiles>().Rester().transform.position;
-                    FireAllowed = true;*/
-                    //AM.Play1();
-                    /*if (crashed.gameObject.GetComponent<Tiles>().tileNum != TileCon.num)
-                    {
-                        TileCon.SelectTileBottom();
-
-
-                    }*/
-                }                  //commented part
+                //for white tiles
             }
             TileCon.SelectTileBottom();
 
@@ -164,76 +122,32 @@ public class MOTION : MonoBehaviour
             gameObject.transform.localScale = new Vector3(0.3196901f, 0.3196901f, 0.3196901f);
             AIM.SetActive(true);
             
-            if (crashed.gameObject.GetComponent<SpriteRenderer>().color == Color.green)///FOR SCORE
+            if (crashed.gameObject.GetComponent<SpriteRenderer>().color == Color.green)
             {
                 crashed.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
                 playsound = decide_tile.pickSound();
                 speaker.GetComponent<AudioSource>().clip = playsound;
                 speaker.Play();
-                if (false)
-                {
-                    //TileCon.SelectTileTop();
-                    //SM.AddScore();
-
-                    //AM.Play1();
-                    /*if (crashed.gameObject.GetComponent<Tiles>().tileNum == TileCon.num)
-                    {
-
-                        TileCon.SelectTileTop();
-
-                    }*/
-                }                //commented part
             }
-            else if (crashed.gameObject.GetComponent<SpriteRenderer>().color == Color.cyan)/// FOR QUit
+            else if (crashed.gameObject.GetComponent<SpriteRenderer>().color == Color.cyan)
             {
-                //crashed.gameObject.GetComponent<SpriteRenderer>().color = Color.cyan;
+                heart[lives - 1].SetActive(false);
                 speaker.GetComponent<AudioSource>().clip = bombAudio;
                 speaker.Play();
-                if (hearts == 1)
+                if (lives == 1)
                 {
                     scriptManager.GameOver();
                 }
                 else
                 {
-                    --hearts;
+                    --lives;
                     FireAllowed = true;
-                    if (false)
-                    {
-                        /*transform.position = crashed.gameObject.GetComponent<Tiles>().Rester().transform.position;
-                        fire.velocity = Vector2.zero;
-                        gameObject.transform.localScale = new Vector3(0.3196901f, 0.3196901f, 0.3196901f);
-                        AIM.SetActive(true);*/
-                        //AM.PlayA3();
-                        /*if (crashed.gameObject.GetComponent<Tiles>().tileNum != TileCon.num)
-                        {
-
-                            TileCon.SelectTileTop();
-
-                        }*/
-                    }            //commented part
                 }
 
             }
             else
             {
-                
-                //crashed.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
-                if (false)
-                {
-                    //TileCon.showBombBottom();
-                    /*AIM.SetActive(true);
-                    transform.position = crashed.gameObject.GetComponent<Tiles>().Rester().transform.position;
-                    fire.velocity = Vector2.zero;
-                    gameObject.transform.localScale = new Vector3(0.3196901f, 0.3196901f, 0.3196901f);
-                    FireAllowed = true;*/
-                    //AM.Play1();
-                    /*if (crashed.gameObject.GetComponent<Tiles>().tileNum != TileCon.num)
-                    {
-
-                        TileCon.SelectTileTop();
-
-                    }*/
-                }                //commented part
+                //for white tiles
             }
             TileCon.SelectTileTop();
 

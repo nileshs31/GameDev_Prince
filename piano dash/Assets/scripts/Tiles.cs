@@ -12,14 +12,30 @@ public class Tiles : MonoBehaviour
         tile.GetComponent<SpriteRenderer>().color = Color.green;
         bomb.SetActive(false);
     }
-    public void PlaceBomb()
+    public void PlaceBombTop()
     {
         if (tile.GetComponent<SpriteRenderer>().color != Color.cyan)
         {
             bomb.SetActive(true);
             tile.GetComponent<SpriteRenderer>().color = Color.cyan;
         }
+        else
+        {
+            TileCon.showBombTop();
+        }
     }
-    
+    public void PlaceBombBottom()
+    {
+        if (tile.GetComponent<SpriteRenderer>().color != Color.cyan)
+        {
+            bomb.SetActive(true);
+            tile.GetComponent<SpriteRenderer>().color = Color.cyan;
+        }
+        else
+        {
+            TileCon.showBombBottom();
+        }
+    }
+
 
 }

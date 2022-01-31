@@ -10,7 +10,7 @@ public class gameConroller : MonoBehaviour
     public GameObject VolumeOnButton;
     public GameObject HowToPlay;
     public GameObject Credits;
-    public GameObject GOscreen;
+    public GameObject GameOverScreen;
     public GameObject POPUP;
     public GameObject Thanks;
     
@@ -100,7 +100,7 @@ public class gameConroller : MonoBehaviour
     }
     public void GameOver()
     {
-        GOscreen.SetActive(true);
+        GameOverScreen.SetActive(true);
         Time.timeScale = 0;
         M.FireAllowed = false;
     }
@@ -125,11 +125,11 @@ public class gameConroller : MonoBehaviour
     }
     public void remover()
     {
-        GOscreen.SetActive(false);
+        GameOverScreen.SetActive(false);
     }
     public void adFinished()
     {
-        GOscreen.SetActive(false);
+        GameOverScreen.SetActive(false);
         M.FireAllowed = false;
         Thanks.SetActive(true);
 
@@ -141,16 +141,6 @@ public class gameConroller : MonoBehaviour
         Time.timeScale = 0;
 
     }
-    /*public void Resume()
-    {
-        H.numOfHealth = 1;
-        Thanks.SetActive(false);
-
-        Time.timeScale = 1;
-        M.canBeTapped = true;
-
-
-    }*/
     public void RetryLevel()
     {
         //POPUP.SetActive(false);
