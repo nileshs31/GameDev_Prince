@@ -19,7 +19,6 @@ public class TileController : MonoBehaviour
         if (SelectedTile != null && SelectedTile.GetComponent<SpriteRenderer>().color != Color.cyan)
         {
             SelectedTile.GetComponent<SpriteRenderer>().color = Color.white;
-            Debug.Log("in the if up");
         }
         index = Random.Range(0, 6);
         tiles[index].GreenTile();
@@ -30,7 +29,6 @@ public class TileController : MonoBehaviour
         if (SelectedTile != null && SelectedTile.GetComponent<SpriteRenderer>().color != Color.cyan)
         {
             SelectedTile.GetComponent<SpriteRenderer>().color = Color.white;
-            Debug.Log("in the if down");
         }
         index = Random.Range(6, 12);
         tiles[index].GreenTile();

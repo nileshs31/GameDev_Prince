@@ -89,25 +89,42 @@ public class MOTION : MonoBehaviour
             }
             else if (crashed.gameObject.GetComponent<SpriteRenderer>().color==Color.cyan)
             {
-                heart[lives - 1].SetActive(false);
                 speaker.GetComponent<AudioSource>().clip = bombAudio;
                 speaker.Play();
-                if (lives == 1)
+                lives -= 2;
+                FireAllowed = true;
+                if (lives<1)
                 {
                     scriptManager.GameOver();
                 }
                 else
                 {
-                    --lives;
-                    FireAllowed = true;
+                    for (int temp = 6; temp > lives; temp--)
+                    {
+                        heart[temp - 1].SetActive(false);
+                    }
                 }
             }
             else                                                                         
             {
                 //for white tiles
+                --lives;
+                if (lives < 1)
+                {
+                    scriptManager.GameOver();
+                }
+                else
+                {
+                    for (int temp = 6; temp > lives; temp--)
+                    {
+                        heart[temp - 1].SetActive(false);
+                    }
+                }
+                speaker.GetComponent<AudioSource>().clip = bombAudio;
+                speaker.Play();
             }
             TileCon.SelectTileBottom();
-
+            Debug.Log(lives);
         }
         else if(!CollidedBottom && crashed.gameObject.tag == "Bottom")
         {
@@ -131,26 +148,42 @@ public class MOTION : MonoBehaviour
             }
             else if (crashed.gameObject.GetComponent<SpriteRenderer>().color == Color.cyan)
             {
-                heart[lives - 1].SetActive(false);
                 speaker.GetComponent<AudioSource>().clip = bombAudio;
                 speaker.Play();
-                if (lives == 1)
+                lives -= 2;
+                FireAllowed = true;
+                if (lives<1)
                 {
                     scriptManager.GameOver();
                 }
                 else
                 {
-                    --lives;
-                    FireAllowed = true;
+                    for (int temp = 6; temp > lives; temp--)
+                    {
+                        heart[temp - 1].SetActive(false);
+                    }
                 }
-
             }
             else
             {
                 //for white tiles
+                --lives;
+                if (lives < 1)
+                {
+                    scriptManager.GameOver();
+                }
+                else
+                {
+                    for (int temp = 6; temp > lives; temp--)
+                    {
+                        heart[temp - 1].SetActive(false);
+                    }
+                }
+                speaker.GetComponent<AudioSource>().clip = bombAudio;
+                speaker.Play();
             }
             TileCon.SelectTileTop();
-
+            Debug.Log(lives);
         }  
         else if(crashed.gameObject.tag == "boundary")             //just for fun bouncing sound//
         {
