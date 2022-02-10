@@ -12,19 +12,16 @@ public class TileDecider : MonoBehaviour
     public AudioClip[] Tilesaudio;
     public AudioSource speaker;
     public int[] order_of_tiles;
+    public TextAsset CSVfile;
+    string[] notes;
+    string[] row;
     int i = 0;
     int starter = -1;
+    int levelno = 1;
     AudioClip[] temp=new AudioClip[12];
     void Start()
     {
-        for (i = 0; i < order_of_tiles.Length; i++)
-        {
-            temp[i] = Tilesaudio[i];
-        }
-        for (i = 0; i < order_of_tiles.Length; i++)
-        {
-            Tilesaudio[i] = temp[order_of_tiles[i]];
-        }
+        row = CSVfile.text.Split(new char[] { '\n' });
     }
 
     // Update is called once per frame
@@ -32,7 +29,26 @@ public class TileDecider : MonoBehaviour
     {
         if (starter == 11)
         {
+            levelno++;
+            takefromCSV();
             starter = -1;
+            Debug.Log("levelno: " + levelno);
+        }
+    }
+    public void takefromCSV()
+    {
+        for (int j = 1; j < levelno + 1; j++)
+        {
+            //words = CSVfile.text.Split(new char[] { ',' });
+            notes = row[levelno].Split(new char[] { ',' });
+        }
+        for (i = 1; i < notes.Length; i++)
+        {
+            temp[i - 1] = Tilesaudio[i - 1];
+        }
+        for (i = 1; i < notes.Length; i++)
+        {
+            Tilesaudio[i - 1] = temp[int.Parse(notes[i]) - 1];
         }
     }
     public AudioClip pickSound()

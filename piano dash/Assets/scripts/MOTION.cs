@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
@@ -24,6 +25,7 @@ public class MOTION : MonoBehaviour
     public AudioClip bombAudio;
     public AudioClip boundarybounce;
     public Text coinDisplay;
+    public TextMeshProUGUI totalcoins;
     public GameObject[] heart;
    
 
@@ -219,7 +221,7 @@ public class MOTION : MonoBehaviour
         {
             Destroy(collision.gameObject);
             coin = coin + 1;
-            coinDisplay.text = coin.ToString();
+            totalcoins.text= coin.ToString();
 
         }
     }  

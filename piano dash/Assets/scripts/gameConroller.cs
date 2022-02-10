@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class gameConroller : MonoBehaviour
 {
@@ -24,6 +25,9 @@ public class gameConroller : MonoBehaviour
     public Slider volume;
     public GameObject Pause;
     public AudioSource soundvolume;
+    public TextMeshProUGUI scoretext;
+    public TextMeshProUGUI besttext;
+    private int highscore;
 
 
     /*public void Start()
@@ -59,6 +63,17 @@ public class gameConroller : MonoBehaviour
         {
             load();
         }
+
+        if (!PlayerPrefs.HasKey("highscore"))
+        {
+            PlayerPrefs.SetInt("highscore", 0);
+            highscore = PlayerPrefs.GetInt("highscore");
+        }
+        else
+        {
+            highscore = PlayerPrefs.GetInt("highscore");
+        }
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
@@ -83,26 +98,22 @@ public class gameConroller : MonoBehaviour
         //AudioListener.volume = 0f;
 
     }
-
-    public void howto()
-    {
-        HowToPlay.SetActive(true);
-    }
-
-    public void credits()
-    {
-        Credits.SetActive(true);
-    }
-
     public void Home()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Home");
     }
     public void GameOver()
     {
         GameOverScreen.SetActive(true);
         Time.timeScale = 0;
         M.FireAllowed = false;
+        scoretext.text = M.coin.ToString();
+        if (M.coin > highscore)
+        {
+            highscore = M.coin;
+            PlayerPrefs.SetInt("highscore", highscore);
+        }
+        besttext.text = highscore.ToString();
     }
     public void Continue()
     {
@@ -184,23 +195,14 @@ public class gameConroller : MonoBehaviour
     private void save()
     {
         PlayerPrefs.SetFloat("soundvolume", volume.value);
-        Debug.Log(PlayerPrefs.GetFloat("soundvolume"));
     }
     public void LoadQuit()                                              //only if we need a final confirmation scene before exiting//
     {
         SceneManager.LoadScene("QuitScene");
     }
-    public void OnApplicationQuit()                                     //function to call when want to exit//
-    {
-        Application.Quit();
-    }
     public void Levels()
     {
         SceneManager.LoadScene("Levels menu");
-    }
-    public void Settings()
-    {
-        SceneManager.LoadScene("Settings menu");
     }
     public void MainMenu()
     {
