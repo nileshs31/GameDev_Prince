@@ -7,19 +7,11 @@ using TMPro;
 public class gameConroller : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject VolumeOffButton;
-    public GameObject VolumeOnButton;
-    public GameObject HowToPlay;
-    public GameObject Credits;
     public GameObject GameOverScreen;
-    public GameObject POPUP;
     public GameObject Thanks;
-    
+    public GameObject continuepanel;
+    public Slider progress;
     public MOTION M;
-    public health H;
-    public audioManager AM;
-    public Level L;
-    public SceneLoader SL;
 
     //
     public Slider volume;
@@ -28,6 +20,9 @@ public class gameConroller : MonoBehaviour
     public TextMeshProUGUI scoretext;
     public TextMeshProUGUI besttext;
     private int highscore;
+    public float currenttime;
+    public float startingtime = 5f;
+    public bool continueenabled = false;
 
 
     /*public void Start()
@@ -74,29 +69,26 @@ public class gameConroller : MonoBehaviour
             highscore = PlayerPrefs.GetInt("highscore");
         }
         Time.timeScale = 1;
+        currenttime = startingtime;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void VolOn()
-    {
-        VolumeOffButton.SetActive(true);
-        VolumeOnButton.SetActive(false);
-        //AudioListener.volume = 1f;
-
-
-    }
-    public void VolOff()
-    {
-        VolumeOnButton.SetActive(true);
-        VolumeOffButton.SetActive(false);
-
-        //AudioListener.volume = 0f;
-
+        if (continueenabled)
+        {
+            if (currenttime > 0)
+            {
+                progress.value = currenttime * 0.2f;
+                currenttime -= Time.unscaledDeltaTime;
+            }
+            else
+            {
+                continueenabled = false;
+                Debug.Log("came out good");
+                GameOver();
+            }
+        }
     }
     public void Home()
     {
@@ -104,6 +96,7 @@ public class gameConroller : MonoBehaviour
     }
     public void GameOver()
     {
+        continuepanel.SetActive(false);
         GameOverScreen.SetActive(true);
         Time.timeScale = 0;
         M.FireAllowed = false;
@@ -115,23 +108,20 @@ public class gameConroller : MonoBehaviour
         }
         besttext.text = highscore.ToString();
     }
-    public void Continue()
+    public void continuescreen()
     {
-        H.numOfHealth = 1;
-
-        Thanks.SetActive(false);
-        SceneManager.LoadScene("scene2");
-        Time.timeScale = 1;
-
-
-
-    }
-    public void showPopUp()
-    {
-        POPUP.SetActive(true);
+        continuepanel.SetActive(true);
         Time.timeScale = 0;
-        M.FireAllowed = false;
-
+        continueenabled = true;
+        //currenttime -= Time.unscaledDeltaTime;
+        //Time.deltaTime
+        /*while (currenttime >0)
+        {
+            currenttime -= Time.time;
+            //currenttime += 1 * Time.deltaTime;
+            Debug.Log(currenttime);
+        }*/
+        //continuepanel.SetActive(false);
 
     }
     public void remover()
@@ -163,17 +153,6 @@ public class gameConroller : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 
 
-
-    }
-    public void NEXT()
-    {
-        POPUP.SetActive(false);
-        AM.temp++;
-        L.level++;
-        L.unlock();
-        RetryLevel();
-        Time.timeScale = 1;
-        M.FireAllowed = true;
 
     }
     public void ResumeGame()

@@ -9,7 +9,10 @@ public class HomeScript : MonoBehaviour
     public GameObject settingspanel;
     public GameObject howtoplay;
     public GameObject credits;
-    public Slider volume;
+    public GameObject areusure;
+    public GameObject soundon;
+    public GameObject soundoff;
+    //public Slider volume;
     public AudioSource soundvolume;
     public string weburl;
     public string playstoreurl;
@@ -65,21 +68,49 @@ public class HomeScript : MonoBehaviour
     {
         credits.SetActive(true);
     }
-    public void volumechange()
+    public void volumeoff()
     {
-        soundvolume.volume = volume.value;
+        soundvolume.volume = 0;
+        //volume.value = 0;
         save();
+        soundoff.SetActive(true);
+        soundon.SetActive(false);
+    }
+    public void volumeon()
+    {
+        soundvolume.volume = 1;
+        //volume.value = 1;
+        save();
+        soundon.SetActive(true);
+        soundoff.SetActive(false);
     }
     private void load()
     {
-        volume.value = PlayerPrefs.GetFloat("soundvolume");
-        soundvolume.volume = volume.value;
+        soundvolume.volume = PlayerPrefs.GetFloat("soundvolume");
+        if (soundvolume.volume == 1)
+        {
+            soundon.SetActive(true);
+            soundoff.SetActive(false); ;
+        }
+        else
+        {
+            soundon.SetActive(false);
+            soundoff.SetActive(true); ;
+        }
     }
     private void save()
     {
-        PlayerPrefs.SetFloat("soundvolume", volume.value);
+        PlayerPrefs.SetFloat("soundvolume", soundvolume.volume);
     }
-    public void OnApplicationQuit()                                     //function to call when want to exit//
+    public void areyousure()
+    {
+        areusure.SetActive(true);
+    }
+    public void notsure()
+    {
+        areusure.SetActive(false);
+    }
+    public void OnApplicationQuit()                                     //function to call when sure to exit//
     {
         Application.Quit();
     }

@@ -97,7 +97,7 @@ public class MOTION : MonoBehaviour
                 FireAllowed = true;
                 if (lives<1)
                 {
-                    scriptManager.GameOver();
+                    scriptManager.continuescreen();
                 }
                 else
                 {
@@ -113,7 +113,7 @@ public class MOTION : MonoBehaviour
                 --lives;
                 if (lives < 1)
                 {
-                    scriptManager.GameOver();
+                    scriptManager.continuescreen();
                 }
                 else
                 {
@@ -156,7 +156,7 @@ public class MOTION : MonoBehaviour
                 FireAllowed = true;
                 if (lives<1)
                 {
-                    scriptManager.GameOver();
+                    scriptManager.continuescreen();
                 }
                 else
                 {
@@ -172,7 +172,7 @@ public class MOTION : MonoBehaviour
                 --lives;
                 if (lives < 1)
                 {
-                    scriptManager.GameOver();
+                    scriptManager.continuescreen();
                 }
                 else
                 {
