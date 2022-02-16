@@ -14,6 +14,7 @@ public class refilllives : MonoBehaviour
         if (motionscript.coin >= 2)
         {
             motionscript.coin -= 2;
+            PlayerPrefs.SetInt("totalcoin", motionscript.coin);
             motionscript.totalcoins.text = motionscript.coin.ToString();
             refill();
         }

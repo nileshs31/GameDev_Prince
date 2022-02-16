@@ -32,7 +32,7 @@ public class HomeScript : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene("Play");
+        SceneManager.LoadScene("Levels");
     }
     public void Settings()
     {

@@ -41,7 +41,18 @@ public class MOTION : MonoBehaviour
     public void Start()
     {
         fire = this.GetComponent<Rigidbody2D>();
-     }
+        if (!PlayerPrefs.HasKey("totalcoin"))
+        {
+            PlayerPrefs.SetInt("totalcoin", 0);
+            coin = PlayerPrefs.GetInt("totalcoin");
+            totalcoins.text = coin.ToString();
+        }
+        else
+        {
+            coin = PlayerPrefs.GetInt("totalcoin");
+            totalcoins.text = coin.ToString();
+        }
+    }
     void Update()
     {
         if (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && FireAllowed)
@@ -221,6 +232,7 @@ public class MOTION : MonoBehaviour
         {
             Destroy(collision.gameObject);
             coin = coin + 1;
+            PlayerPrefs.SetInt("totalcoin", coin);
             totalcoins.text= coin.ToString();
 
         }

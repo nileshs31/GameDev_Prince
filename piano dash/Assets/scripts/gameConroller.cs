@@ -85,7 +85,7 @@ public class gameConroller : MonoBehaviour
             else
             {
                 continueenabled = false;
-                Debug.Log("came out good");
+                //Debug.Log("came out good");
                 GameOver();
             }
         }
