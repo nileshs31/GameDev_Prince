@@ -8,6 +8,7 @@ public class refilllives : MonoBehaviour
     public MOTION motionscript;
     public GameObject continuescreen;
     public gameConroller continuescreenupdate;
+    public GameObject tweentext;
 
     public void checkforcoins()
     {
@@ -17,12 +18,15 @@ public class refilllives : MonoBehaviour
             PlayerPrefs.SetInt("totalcoin", motionscript.coin);
             motionscript.totalcoins.text = motionscript.coin.ToString();
             refill();
+            tweentext.SetActive(false);
         }
         else
         {
-            //do something
+            tweentext.SetActive(false);
+            tweentext.SetActive(true);
         }
     }
+
     public void refill()
     {
         continuescreen.SetActive(false);
