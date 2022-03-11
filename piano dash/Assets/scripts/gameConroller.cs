@@ -11,19 +11,32 @@ public class gameConroller : MonoBehaviour
     public GameObject Thanks;
     public GameObject continuepanel;
     public Slider progress;
+    public Slider scoreslider;
     public MOTION M;
 
     //
     public Slider volume;
     public GameObject Pause;
+    public GameObject levelcomplete;
     public AudioSource soundvolume;
     public TextMeshProUGUI scoretext;
     public TextMeshProUGUI besttext;
     private int highscore;
     public float currenttime;
+    public float scoretime = 50f;
     public float startingtime = 5f;
     public bool continueenabled = false;
+    public TextMeshProUGUI winscore;
+    public TextMeshProUGUI wincoins;
+    public TextMeshProUGUI whichlevel;
+    public GameObject starfull1;
+    public GameObject starfull2;
+    public GameObject star1;
+    public GameObject star2;
+    public GameObject star3;
 
+
+    bool scorestar = true;
 
     /*public void Start()
     {
@@ -89,6 +102,25 @@ public class gameConroller : MonoBehaviour
                 GameOver();
             }
         }
+        if (scoretime > 0)
+        {
+            scoreslider.value = scoretime * 0.02f;
+            scoretime -= Time.unscaledDeltaTime;
+        }
+        checkforstars();
+    }
+    public void checkforstars()
+    {
+        if (scorestar && scoreslider.value <= 0.67f)
+        {
+            starfull1.SetActive(false);
+            scorestar = false;
+
+        }
+        if (!scorestar && scoreslider.value <= 0.32f)
+        {
+            starfull2.SetActive(false);
+        }
     }
     public void Home()
     {
@@ -107,6 +139,37 @@ public class gameConroller : MonoBehaviour
             PlayerPrefs.SetInt("highscore", highscore);
         }
         besttext.text = highscore.ToString();
+    }
+    public void levelwon(int level)
+    {
+        levelcomplete.SetActive(true);
+        Time.timeScale = 0;
+        winscore.text = M.coin.ToString();    //formula for score calculation
+        wincoins.text = M.coin.ToString();
+        whichlevel.text = level.ToString();
+        if (scoreslider.value < 0.67 && scoreslider.value > 0.32)
+        {
+            star1.SetActive(false);
+        }
+        else if (scoreslider.value < 0.32)
+        {
+            star1.SetActive(false);
+            star2.SetActive(false);
+        }
+        star3.SetActive(true);
+        //if else comparison for displaying star based on slider value
+    }
+    public void levelwonhide()
+    {
+        star1.SetActive(false);
+        star2.SetActive(false);
+        star3.SetActive(false);
+        levelcomplete.SetActive(false);
+        Time.timeScale = 1;
+        scoretime = 50f;
+        starfull1.SetActive(true);
+        starfull2.SetActive(true);
+        scorestar = true;
     }
     public void continuescreen()
     {
@@ -158,6 +221,8 @@ public class gameConroller : MonoBehaviour
     public void ResumeGame()
     {
         Pause.SetActive(false);
+        M.dragged = false;
+        M.aimmove = false;
         Time.timeScale = 1;
         //M.canBeTapped = true;
     }

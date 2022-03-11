@@ -17,6 +17,9 @@ public class HomeScript : MonoBehaviour
     public string weburl;
     public string playstoreurl;
     public string instaurl;
+    int manual = -1;             //-1 means manual is off, automatic is on and 1 means manual is on and automatic is off//
+    public GameObject manualbutton;
+    public GameObject automaticbutton;
 
     public void Start()
     {
@@ -28,6 +31,27 @@ public class HomeScript : MonoBehaviour
         else
         {
             load();
+        }
+
+
+        if (!PlayerPrefs.HasKey("manual"))
+        {
+            PlayerPrefs.SetInt("manual", -1);
+            manual = PlayerPrefs.GetInt("manual");
+        }
+        else
+        {
+            manual = PlayerPrefs.GetInt("manual");
+        }
+        if (manual == 1)
+        {
+            manualbutton.SetActive(true);
+            automaticbutton.SetActive(false);
+        }
+        else
+        {
+            manualbutton.SetActive(false);
+            automaticbutton.SetActive(true);
         }
     }
     public void Play()
@@ -113,6 +137,20 @@ public class HomeScript : MonoBehaviour
     public void OnApplicationQuit()                                     //function to call when sure to exit//
     {
         Application.Quit();
+    }
+    public void manualmovement()
+    {
+        manual = 1;
+        PlayerPrefs.SetInt("manual", manual);
+        manualbutton.SetActive(true);
+        automaticbutton.SetActive(false);
+    }
+    public void automaticmovement()
+    {
+        manual = -1;
+        PlayerPrefs.SetInt("manual", manual);
+        manualbutton.SetActive(false);
+        automaticbutton.SetActive(true);
     }
 
 

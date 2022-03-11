@@ -19,13 +19,16 @@ public class TileDecider : MonoBehaviour
     int starter = -1;
     int levelno = 1;
     AudioClip[] temp=new AudioClip[12];
-    public GameObject levelcomplete;
+    
     public Animator levelcompanim;
 
     string rowsjson="";
     string[] lines;
     List<string> eachrow;
     public GameObject networkerror;
+    public gameConroller gamecontroller;
+    public Animator aim;
+
 
     void Start()
     {
@@ -39,11 +42,16 @@ public class TileDecider : MonoBehaviour
         {
             levelno = PlayerPrefs.GetInt("levelno");
         }
+
+        if (PlayerPrefs.GetInt("manual") == 1)
+        {
+            aim.enabled = false;
+        }
+        else
+        {
+            aim.speed = 0.5f + (levelno * 0.01f);
+        }
         takefromCSV();
-    }
-    public void resetanim()
-    {
-        levelcomplete.SetActive(false);
     }
 
     // Update is called once per frame
@@ -58,11 +66,7 @@ public class TileDecider : MonoBehaviour
             }
             takefromCSV();
             starter = -1;
-            levelcomplete.SetActive(true);
-            levelcompanim.enabled = true;
-            levelcompanim.speed = 3f;
-            levelcompanim.Play("task_anim");
-            Invoke("resetanim", 3f);
+            gamecontroller.levelwon(levelno-1);
             Debug.Log("levelno: " + levelno);
         }
     }

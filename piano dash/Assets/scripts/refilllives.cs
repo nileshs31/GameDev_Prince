@@ -30,6 +30,8 @@ public class refilllives : MonoBehaviour
     public void refill()
     {
         continuescreen.SetActive(false);
+        motionscript.dragged = false;
+        motionscript.aimmove = false;
         motionscript.lives = 6;
         continuescreenupdate.continueenabled = false;
         Time.timeScale = 1;

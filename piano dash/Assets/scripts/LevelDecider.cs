@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelDecider : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class LevelDecider : MonoBehaviour
     int levelopened;
     //bool buttoninteractable = false;
     GameObject levelbutton;
+    public GameObject[] heart;
+    int lives;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +39,20 @@ public class LevelDecider : MonoBehaviour
         {
             levelbutton = GameObject.Find(i.ToString());
             levelbutton.GetComponent<Button>().interactable = true;
+        }/*
+        if (!PlayerPrefs.HasKey("chanceleft"))
+        {
+            PlayerPrefs.SetInt("chanceleft", 6);
+            lives = PlayerPrefs.GetInt("chanceleft");
         }
+        else
+        {
+            lives = PlayerPrefs.GetInt("chanceleft");
+        }
+        for (int temp = 6; temp > lives; temp--)
+        {
+            heart[temp - 1].SetActive(false);
+        }*/
     }
 
     public void whichlevel()
